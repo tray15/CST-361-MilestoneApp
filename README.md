@@ -1,3 +1,3 @@
 # CST-361-MilestoneApp
  
-Sensors IOT API and web app for CST-361
+Sensors IOT web app and API for CST-361
