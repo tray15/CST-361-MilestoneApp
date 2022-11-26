@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3c//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<head>
+<title>Insert title here</title>
+</head>
+<ui:composition template="/layouts/template.xhtml">
+	<ui:define name="content">
+		<body>
+			<h:form>
+				Username:<h:inputText value="#{userModel.username}"></h:inputText>
+				<br />
+				Password:<h:inputText value="#{userModel.password}"></h:inputText>
+				<h:messages />
+				<br />
+				<h:commandButton action="#{loginController.login(userModel)}"
+					value="Login"></h:commandButton>
+			</h:form>
+		</body>
+	</ui:define>
+</ui:composition>
+</html>

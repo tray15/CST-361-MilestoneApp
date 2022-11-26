@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3c//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<head>
+<title>Events</title>
+</head>
+<body>
+	<ui:composition template="/layouts/template.xhtml">
+		<ui:define name="content">
+			<h:form>
+				<h3>Event History</h3>
+				<p>Hello, #{userModel.username}. Here is your event history.</p>
+				<br />
+				<h:dataTable
+					value="#{sensorController.service.getSensor(userModel)}" var="s">
+					<h:column>
+						<f:facet name="header">SensorID</f:facet>
+					#{s.sensorId}
+				</h:column>
+					<h:column>
+						<f:facet name="header">Location</f:facet>
+					#{s.location}
+				</h:column>
+					<h:column>
+						<f:facet name="header">Date</f:facet>
+					#{s.eventDate}
+				</h:column>
+				</h:dataTable>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>
