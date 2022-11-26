@@ -12,6 +12,12 @@ import beans.Sensor;
 import beans.UserModel;
 import data.DAO;
 
+/**
+ * 
+ * @author tanner ray
+ * logic to handle sensor data
+ */
+
 @Stateless
 @LocalBean
 @Local(SensorManagerInterface.class)

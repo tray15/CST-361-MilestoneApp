@@ -1,11 +1,15 @@
 package beans;
 
-import java.util.List;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+/**
+ * 
+ * @author tanner ray
+ * user class model
+ */
 
 @ManagedBean
 @SessionScoped

@@ -14,6 +14,12 @@ import beans.UserModel;
 import data.DAO;
 import util.LoggingInterceptor;
 
+/**
+ * 
+ * @author Tanner Ray
+ *
+ */
+
 @Stateless
 @LocalBean
 @Local(SensorManagerInterface.class)

@@ -1,11 +1,15 @@
 package beans;
 
-import java.util.List;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+/**
+ * 
+ * @author Tanner Ray
+ *
+ */
 
 @ManagedBean
 @SessionScoped
@@ -19,7 +23,6 @@ public class UserModel {
 	@Size(min = 5, max = 50)
 	private String password;
 	private int userId;
-	
 	private Boolean loggedIn;
 
 	public UserModel() {

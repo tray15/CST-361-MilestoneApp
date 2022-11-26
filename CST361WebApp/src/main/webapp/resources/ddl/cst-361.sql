@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3307
--- Generation Time: Nov 26, 2022 at 03:56 AM
+-- Generation Time: Nov 26, 2022 at 08:13 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -25,15 +25,43 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `eventhistory`
+--
+
+CREATE TABLE `eventhistory` (
+  `event_id` int(11) NOT NULL,
+  `sensor_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `event_date` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `eventhistory`
+--
+
+INSERT INTO `eventhistory` (`event_id`, `sensor_id`, `user_id`, `event_date`) VALUES
+(1, 1, 1, '11-03-2020'),
+(2, 2, 1, '10-07-2021');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `sensors`
 --
 
 CREATE TABLE `sensors` (
   `sensor_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `location` varchar(50) NOT NULL,
-  `event` date DEFAULT NULL
+  `location` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `sensors`
+--
+
+INSERT INTO `sensors` (`sensor_id`, `user_id`, `location`) VALUES
+(1, 1, 'Living Room'),
+(2, 1, 'Front Door');
 
 -- --------------------------------------------------------
 
@@ -48,8 +76,22 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user_id`, `username`, `password`) VALUES
+(1, 'tray15', 'tray15');
+
+--
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `eventhistory`
+--
+ALTER TABLE `eventhistory`
+  ADD PRIMARY KEY (`event_id`),
+  ADD KEY `sensor` (`sensor_id`);
 
 --
 -- Indexes for table `sensors`
@@ -68,16 +110,32 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `eventhistory`
+--
+ALTER TABLE `eventhistory`
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `sensors`
 --
 ALTER TABLE `sensors`
-  MODIFY `sensor_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `sensor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `eventhistory`
+--
+ALTER TABLE `eventhistory`
+  ADD CONSTRAINT `sensor` FOREIGN KEY (`sensor_id`) REFERENCES `sensors` (`sensor_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

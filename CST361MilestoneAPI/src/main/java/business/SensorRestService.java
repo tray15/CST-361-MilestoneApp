@@ -14,6 +14,12 @@ import beans.Sensor;
 import util.SensorNotFoundException;
 import beans.ResponseDataModel;
 
+/**
+ * 
+ * @author Tanner Ray
+ *
+ */
+
 @Path("/sensors")
 @Produces({ "application/xml", "application/json" })
 @Consumes({ "application/xml", "application/json" })

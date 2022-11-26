@@ -1,10 +1,17 @@
 package data;
 
 import java.sql.SQLException;
+
 import java.util.List;
 
 import beans.Sensor;
 import beans.UserModel;
+
+/**
+ * 
+ * @author Tanner Ray
+ *
+ */
 
 public interface DataAccessInterface {
 	void register(UserModel user) throws SQLException;

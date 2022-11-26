@@ -8,6 +8,12 @@ import javax.inject.Inject;
 import beans.UserModel;
 import business.UserManager;
 
+/**
+ * 
+ * @author tanner ray
+ * handles user registration form
+ */
+
 @ManagedBean
 @SessionScoped
 public class RegisterController {

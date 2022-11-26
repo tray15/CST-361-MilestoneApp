@@ -5,20 +5,26 @@ import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+/**
+ * 
+ * @author tanner ray
+ * sensor class model
+ */
+
 @ManagedBean
 @ViewScoped
 public class Sensor {
 	private int sensorId;
 	private int userId;
 	private String location;
-	private Date eventDate;
+	private String eventDate;
 	
 	public Sensor() {
 		sensorId = 0;
 		userId = 0;
 		location = "";
 	}
-	public Sensor(int sensorId, int userId, String location, Date eventDate) {
+	public Sensor(int sensorId, int userId, String location, String eventDate) {
 		this.sensorId = sensorId;
 		this.userId = userId;
 		this.location = location;
@@ -42,10 +48,10 @@ public class Sensor {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	public Date getEventDate() {
+	public String getEventDate() {
 		return eventDate;
 	}
-	public void setEventDate(Date eventDate) {
+	public void setEventDate(String eventDate) {
 		this.eventDate = eventDate;
 	}
 	

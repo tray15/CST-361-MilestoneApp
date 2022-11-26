@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -15,14 +13,16 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Alternative;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import beans.Sensor;
 import beans.UserModel;
+
+/**
+ * 
+ * @author Tanner Ray
+ *
+ */
 
 @Stateless
 @Local(DataAccessInterface.class)
@@ -136,6 +136,7 @@ public class DAO implements DataAccessInterface {
 				found.setSensorId(rs.getInt("sensor_id"));
 				found.setUserId(rs.getInt("user_id"));
 				found.setLocation(rs.getString("location"));
+				found.setEventDate(rs.getString("event"));
 				
 				return found;
 			}
@@ -155,7 +156,7 @@ public class DAO implements DataAccessInterface {
 		try {
 			int id = um.getUserId();
 			//URL with parameters
-			URL url = new URL("http://localhost:8080/MilestoneUI/rest/sensors/getusersensors/" + id);
+			URL url = new URL("http://localhost:8080/CST361MilestoneAPI/rest/sensors/getusersensors/" + id);
 			conn = (HttpURLConnection)url.openConnection();
 			
 			try {
@@ -172,6 +173,7 @@ public class DAO implements DataAccessInterface {
 				ObjectMapper mapper = new ObjectMapper();
 				try {
 					List<Sensor> sensorList = Arrays.asList(mapper.readValue(result, Sensor[].class));
+					
 					return sensorList;
 					
 				} catch (Exception e) {

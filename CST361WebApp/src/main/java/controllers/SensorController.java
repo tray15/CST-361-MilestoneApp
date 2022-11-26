@@ -8,6 +8,12 @@ import javax.inject.Inject;
 import beans.UserModel;
 import business.SensorManagerInterface;
 
+/**
+ * 
+ * @author tanner ray
+ * sensor controller current use is just business layer injection
+ */
+
 @ManagedBean
 @ViewScoped
 public class SensorController {

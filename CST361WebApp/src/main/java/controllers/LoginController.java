@@ -9,6 +9,12 @@ import javax.inject.Inject;
 import beans.UserModel;
 import business.UserManager;
 
+/**
+ * 
+ * @author tanner ray
+ * login controller
+ */
+
 @ManagedBean
 @SessionScoped
 public class LoginController {

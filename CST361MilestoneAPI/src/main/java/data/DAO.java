@@ -14,6 +14,12 @@ import beans.Sensor;
 import beans.UserModel;
 import util.LoggingInterceptor;
 
+/**
+ * 
+ * @author Tanner Ray
+ *
+ */
+
 @Interceptors(LoggingInterceptor.class)
 @Stateless
 @Local(DataAccessInterface.class)
@@ -27,7 +33,7 @@ public class DAO implements DataAccessInterface {
 		
 	private static final String INSERT_SENSOR = "INSERT INTO sensors (location) VALUES (?)";
 	private static final String FIND_SENSOR = "SELECT * FROM sensors WHERE user_id=?";
-	private static final String FIND_USER_SENSORS = "SELECT * FROM sensors WHERE user_id=?";
+	private static final String FIND_USER_SENSORS = "SELECT * FROM sensors INNER JOIN eventhistory ON sensors.sensor_id=eventhistory.sensor_id WHERE sensors.user_id=?";
 
 	
 	@Override
@@ -73,7 +79,7 @@ public class DAO implements DataAccessInterface {
 				int sensorId = rs.getInt("sensor_id");
 				int userId = rs.getInt("user_id");
 				String location = rs.getString("location");
-				Date date = rs.getDate("event");
+				String date = rs.getString("event");
 				
 				Sensor found = new Sensor(sensorId, userId, location, date);
 				
@@ -106,7 +112,7 @@ public class DAO implements DataAccessInterface {
 				found.setSensorId(rs.getInt("sensor_id"));
 				found.setUserId(rs.getInt("user_id"));
 				found.setLocation(rs.getString("location"));
-				found.setEventDate(rs.getDate("event"));
+				found.setEventDate(rs.getString("event_date"));
 				
 				sensors.add(found);
 			}

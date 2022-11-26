@@ -1,5 +1,11 @@
 package beans;
 
+/**
+ * 
+ * @author Tanner Ray
+ *
+ */
+
 public class ResponseModel {
 	protected int status;
 	protected String message;

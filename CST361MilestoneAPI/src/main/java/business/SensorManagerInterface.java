@@ -4,6 +4,12 @@ import java.util.List;
 
 import beans.Sensor;
 
+/**
+ * 
+ * @author Tanner Ray
+ *
+ */
+
 public interface SensorManagerInterface {
 	Sensor addSensor(Sensor sensor);
 	Sensor getSensor(Sensor sensor);
