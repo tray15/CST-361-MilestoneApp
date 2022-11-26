@@ -79,9 +79,8 @@ public class DAO implements DataAccessInterface {
 				int sensorId = rs.getInt("sensor_id");
 				int userId = rs.getInt("user_id");
 				String location = rs.getString("location");
-				String date = rs.getString("event");
 				
-				Sensor found = new Sensor(sensorId, userId, location, date);
+				Sensor found = new Sensor(sensorId, userId, location);
 				
 				return found;
 			}
