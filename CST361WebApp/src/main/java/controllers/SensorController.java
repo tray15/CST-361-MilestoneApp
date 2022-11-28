@@ -2,10 +2,8 @@ package controllers;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
-import beans.UserModel;
 import business.SensorManagerInterface;
 
 /**
@@ -23,4 +21,11 @@ public class SensorController {
 	public SensorManagerInterface getService() {
 		return service;
 	}
+	
+	public String emulateEvent() {
+		service.generateEvent();
+		
+		return "";
+	}
+	
 }

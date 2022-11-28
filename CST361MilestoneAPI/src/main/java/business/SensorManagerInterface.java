@@ -11,7 +11,7 @@ import beans.Sensor;
  */
 
 public interface SensorManagerInterface {
-	Sensor addSensor(Sensor sensor);
+	void addSensor(Sensor sensor);
 	Sensor getSensor(Sensor sensor);
 	List<Sensor> getAllSensors(String name);
 }

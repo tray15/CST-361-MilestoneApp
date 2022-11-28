@@ -30,6 +30,11 @@ public class Sensor {
 		this.location = location;
 		this.eventDate = eventDate;
 	}
+	public Sensor(int userId, String location, String eventDate) {
+		this.userId = userId;
+		this.location = location;
+		this.eventDate = eventDate;
+	}
 	public int getSensorId() {
 		return sensorId;
 	}

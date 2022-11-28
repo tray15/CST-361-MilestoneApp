@@ -31,9 +31,8 @@ public class SensorManager implements SensorManagerInterface {
 	}
 
 	@Override
-	public Sensor addSensor(Sensor sensor) {
-		Sensor createSensor = this.dao.create(sensor);
-		return createSensor;
+	public void addSensor(Sensor sensor) {
+		this.dao.create(sensor);
 	}
 	
 	@Override
@@ -45,5 +44,9 @@ public class SensorManager implements SensorManagerInterface {
 	public Sensor findSensor(Sensor sensor) {
 		Sensor found = this.dao.findSensor(sensor);
 		return found;
+	}
+	@Override
+	public void generateEvent() {
+		this.dao.generateEvent();
 	}
 }

@@ -39,7 +39,8 @@ public class LoginController {
 	}
 	
 	public String logout() {
-		
+		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+		context.getSessionMap().clear();
 		return "login.xhtml";
 	}
 }

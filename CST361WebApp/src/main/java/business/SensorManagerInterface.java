@@ -12,7 +12,9 @@ import beans.UserModel;
  */
 
 public interface SensorManagerInterface {
-	Sensor addSensor(Sensor sensor);
+	void addSensor(Sensor sensor);
 	List<Sensor> getSensor(UserModel um);
 	Sensor findSensor(Sensor sensor);
+	
+	void generateEvent();
 }

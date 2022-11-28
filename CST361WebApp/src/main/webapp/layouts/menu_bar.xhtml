@@ -8,18 +8,30 @@
 
 <ui:composition>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-	<div class="container-fluid">
-		<div class="collapse navbar-collapse" id="navbarColor01">
-			<ul class="navbar-nav me-auto">
-				<li class="nav-item"><a class="nav-link" href="index.xhtml">Home</a>
-				</li>
-				<li class="nav-item"><a class="nav-link" href="login.xhtml">Login</a>
-				</li>
-				<li class="nav-item"><a class="nav-link" href="register.xhtml">Register</a>
-				</li>
-			</ul>
+		<div class="container-fluid">
+			<div class="collapse navbar-collapse" id="navbarColor01">
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="index.xhtml">Home</a>
+					</li>
+					<c:if test="#{empty userModel.username}">
+						<li class="nav-item">
+							<a class="nav-link" href="login.xhtml">Login</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="register.xhtml">Register</a>
+						</li>
+					</c:if>
+					<c:if test="#{not empty userModel.username}">
+						<li class="nav-item">
+							<h:form>
+								<h:commandLink value="Logout" action="#{loginController.logout()}" class="nav-link"></h:commandLink>
+							</h:form>
+						</li>
+					</c:if>
+				</ul>
+			</div>
 		</div>
-	</div>
 	</nav>
 </ui:composition>
 </html>

@@ -6,6 +6,7 @@ import java.net.URL;
 import java.sql.*;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 import javax.ejb.Local;
@@ -40,12 +41,12 @@ public class DAO implements DataAccessInterface {
 	private static final String INSERT_SENSOR = "INSERT INTO sensors (location) VALUES (?)";
 	private static final String FIND_SENSOR = "SELECT * FROM sensors WHERE user_id=?";
 	
+	private static final String GENERATE_RANDOM_EVENT = "INSERT INTO eventhistory (sensor_id, user_id, event_date) VALUES (?, ?, ?)";
 	@Override
 	public void register(UserModel user) throws SQLException {
 		
 		Connection c = null;
 		PreparedStatement stmt = null;
-		
 		try {
 
 			c = DriverManager.getConnection(DB_URL, DB_USER, PASSWORD);
@@ -55,6 +56,7 @@ public class DAO implements DataAccessInterface {
 			stmt.setString(2, user.getPassword());
 			
 			stmt.executeUpdate();
+			
 			
 			close(stmt);
 			close(c);
@@ -93,23 +95,16 @@ public class DAO implements DataAccessInterface {
 }
 	
 	@Override
-	public Sensor create(Sensor sensor) {
+	public void create(Sensor sensor) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		
 		try {
 			conn = getConnection();
 			stmt = conn.prepareStatement(INSERT_SENSOR, Statement.RETURN_GENERATED_KEYS);
-			stmt.setInt(1, sensor.getSensorId());
-			stmt.setString(2, sensor.getLocation());
+			stmt.setString(1, sensor.getLocation());
 			
-			ResultSet rs = stmt.getGeneratedKeys();
+			stmt.executeUpdate();
 			
-			if (rs.next()) {
-				sensor.setSensorId(rs.getInt(1));
-			}
-			
-			return this.findSensor(sensor);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} finally {
@@ -191,6 +186,29 @@ public class DAO implements DataAccessInterface {
 		}
 		return null;
 	}
+	
+	@Override
+	public void generateEvent() {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		try {
+			int sensor = randomSensor();
+			String date = randomDate();
+			
+			conn = getConnection();
+			stmt = conn.prepareStatement(GENERATE_RANDOM_EVENT, Statement.RETURN_GENERATED_KEYS);
+			stmt.setInt(1, sensor);
+			stmt.setInt(2, 1);
+			stmt.setString(3, date);
+			
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(conn);
+		}
+	}
 
 	private Connection getConnection() {
 		try {
@@ -218,5 +236,24 @@ public class DAO implements DataAccessInterface {
 				throw new RuntimeException(e);
 			}
 		}
+	}
+	public int randomSensor() {
+		int[] sensors = { 1, 2, 3, 4, 5, 6 };
+		int randomSensor = new Random().nextInt(sensors.length);
+		
+		return sensors[randomSensor];
+	}
+	
+	public String randomDate() {
+		Random rand = new Random();
+		int month = rand.nextInt(12-1) + 1;
+		int day = rand.nextInt(30-1) +1;
+		int year = 2022;
+		
+		
+		
+		String date = month + "-" + day + "-" + year;
+		
+		return date;
 	}
 }

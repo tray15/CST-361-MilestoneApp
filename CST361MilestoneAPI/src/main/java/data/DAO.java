@@ -31,13 +31,13 @@ public class DAO implements DataAccessInterface {
 	private static final String DB_USER = "root";
 	private static final String PASSWORD = "root";
 		
-	private static final String INSERT_SENSOR = "INSERT INTO sensors (location) VALUES (?)";
+	private static final String INSERT_SENSOR = "INSERT INTO sensors (user_id, location, date) VALUES (1, ?, ?)";
 	private static final String FIND_SENSOR = "SELECT * FROM sensors WHERE user_id=?";
-	private static final String FIND_USER_SENSORS = "SELECT * FROM sensors INNER JOIN eventhistory ON sensors.sensor_id=eventhistory.sensor_id WHERE sensors.user_id=?";
+	private static final String FIND_USER_SENSORS = "SELECT * FROM sensors INNER JOIN eventhistory ON sensors.sensor_id=eventhistory.sensor_id WHERE sensors.user_id=? ORDER BY eventhistory.event_id";
 
 	
 	@Override
-	public Sensor create(Sensor sensor) {
+	public void create(Sensor sensor) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		
@@ -47,13 +47,7 @@ public class DAO implements DataAccessInterface {
 			stmt.setInt(1, sensor.getSensorId());
 			stmt.setString(2, sensor.getLocation());
 			
-			ResultSet rs = stmt.getGeneratedKeys();
-			
-			if (rs.next()) {
-				sensor.setSensorId(rs.getInt(1));
-			}
-			
-			return this.findSensor(sensor);
+			stmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} finally {

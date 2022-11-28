@@ -17,8 +17,10 @@ public interface DataAccessInterface {
 	void register(UserModel user) throws SQLException;
 	public UserModel getByUsername(UserModel u);
 	
-	Sensor create(Sensor sensor);
+	void create(Sensor sensor);
 	List<Sensor> getSensor(UserModel um);
 	Sensor findSensor(Sensor sensor);
+	
+	void generateEvent();
 	
 }

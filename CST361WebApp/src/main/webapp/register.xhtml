@@ -9,15 +9,18 @@
 <h:head>
 	<title>Registration</title>
 </h:head>
-<h:body>
-	<h:form>
-		<h1>Register</h1>
-		Username:<h:inputText value="#{userModel.username}"></h:inputText>
-		<br />
-		Password:<h:inputText value="#{userModel.password}"></h:inputText>
-		<br />
-		<h:commandButton action="#{registerController.register()}"
-			value="Register"></h:commandButton>
-	</h:form>
-</h:body>
+<ui:composition template="/layouts/template.xhtml">
+	<ui:define name="content">
+		<h:body>
+			<h:form>
+				<div class="form-group" id="loginregister">
+					<h3>Register here!</h3>
+					Username: <h:inputText value="#{userModel.username}" class="form-control"></h:inputText><br />
+					Password: <h:inputText value="#{userModel.password}" class="form-control"></h:inputText><br />
+					<h:commandButton action="#{registerController.register()}" value="Register" class="btn btn-primary"></h:commandButton>
+				</div>
+			</h:form>
+		</h:body>
+	</ui:define>
+</ui:composition>
 </html>

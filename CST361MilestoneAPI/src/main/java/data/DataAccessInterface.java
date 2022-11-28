@@ -12,7 +12,7 @@ import beans.UserModel;
  */
 
 public interface DataAccessInterface {
-	Sensor create(Sensor sensor);
+	void create(Sensor sensor);
 	Sensor findSensor(Sensor sensor);
 	List<Sensor> getAllSensors(String id);
 }

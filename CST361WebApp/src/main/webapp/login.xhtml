@@ -10,13 +10,14 @@
 	<ui:define name="content">
 		<body>
 			<h:form>
-				Username:<h:inputText value="#{userModel.username}"></h:inputText>
-				<br />
-				Password:<h:inputText value="#{userModel.password}"></h:inputText>
-				<h:messages />
-				<br />
-				<h:commandButton action="#{loginController.login(userModel)}"
-					value="Login"></h:commandButton>
+				<div class="form-group" id="loginregister">
+					<h3>Login here!</h3><br />
+					Username: <h:inputText value="#{userModel.username}" class="form-control"></h:inputText><br />
+					Password: <h:inputSecret value="#{userModel.password}" class="form-control"></h:inputSecret>
+					<h:messages /><br />
+					
+					<h:commandButton action="#{loginController.login(userModel)}" value="Login" class="btn btn-primary"></h:commandButton>
+				</div>
 			</h:form>
 		</body>
 	</ui:define>

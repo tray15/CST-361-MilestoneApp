@@ -1,0 +1,31 @@
+.order-table {
+	border: 1px solid black;
+	padding: 5px;
+}
+
+.order-table-header {
+	border-bottom: 1px solid black;
+	padding: 5px;
+}
+
+.order-table-even {
+	background: #EEE;
+}
+
+#content {
+	text-align: center;
+	margin: auto;
+	padding: 2rem;
+}
+
+.headerfooter {
+	text-align: center;
+}
+
+#loginregister {
+	justify-content: center;
+	margin: auto;
+	width: 350px;
+	padding: 15px;
+	text-align: center;
+}
