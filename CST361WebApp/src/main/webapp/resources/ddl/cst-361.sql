@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3307
--- Generation Time: Nov 26, 2022 at 08:13 PM
+-- Generation Time: Nov 30, 2022 at 08:42 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -41,7 +41,8 @@ CREATE TABLE `eventhistory` (
 
 INSERT INTO `eventhistory` (`event_id`, `sensor_id`, `user_id`, `event_date`) VALUES
 (1, 1, 1, '11-03-2020'),
-(2, 2, 1, '10-07-2021');
+(2, 2, 1, '10-07-2021'),
+(3, 4, 1, '3-29-2022');
 
 -- --------------------------------------------------------
 
@@ -61,7 +62,10 @@ CREATE TABLE `sensors` (
 
 INSERT INTO `sensors` (`sensor_id`, `user_id`, `location`) VALUES
 (1, 1, 'Living Room'),
-(2, 1, 'Front Door');
+(2, 1, 'Front Door'),
+(3, 1, 'Main Bedroom'),
+(4, 1, 'Kitchen'),
+(5, 1, 'Back Door');
 
 -- --------------------------------------------------------
 
@@ -80,7 +84,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `username`, `password`) VALUES
-(1, 'tray15', 'tray15');
+(1, 'gcu', 'lopes');
 
 --
 -- Indexes for dumped tables
@@ -113,13 +117,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `eventhistory`
 --
 ALTER TABLE `eventhistory`
-  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `sensors`
 --
 ALTER TABLE `sensors`
-  MODIFY `sensor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `sensor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user`
