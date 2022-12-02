@@ -4,6 +4,8 @@ import java.sql.SQLException;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import beans.UserModel;
@@ -21,21 +23,31 @@ public class UserManager {
 	@Inject
 	DAO dao;
 	
-	public void register(UserModel user) {
+	public void register(UserModel user) throws RuntimeException, SQLException {
 		try {
 			dao.register(user);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 	}
 	
-	public UserModel findUser(UserModel user) {
+	public UserModel findUser(UserModel user) throws RuntimeException, SQLException {
 		try {
 			return dao.getByUsername(user);
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
-		return null;
+	}
+	
+	public Boolean userExists(UserModel user) throws RuntimeException, SQLException {
+		try {
+			if (dao.getByUsername(user) != null) {
+				return true;
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		return false;
 	}
 
 }

@@ -16,11 +16,11 @@ import javax.validation.constraints.Size;
 public class UserModel {
 
 	@NotNull()
-	@Size(min = 5, max = 50)
+	@Size(min = 3, max = 50)
 	private String username;
 
 	@NotNull()
-	@Size(min = 5, max = 50)
+	@Size(min = 3, max = 50)
 	private String password;
 	private int userId;
 	private Boolean loggedIn;

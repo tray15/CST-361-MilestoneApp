@@ -1,5 +1,8 @@
 package controllers;
 
+import java.sql.SQLException;
+
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -24,16 +27,21 @@ public class RegisterController {
 		FacesContext context = FacesContext.getCurrentInstance();
 		UserModel user = context.getApplication().evaluateExpressionGet(context, "#{userModel}", UserModel.class);
 		
+		
 		if (user != null) {
 			try {
+				if (this.um.userExists(user)) {
+					context.addMessage(null, new FacesMessage("A user with these credentials already exists."));
+					context.getExternalContext().getSessionMap().clear();
+					return "";
+				}
 				this.um.register(user);
-			} catch (Exception e) {
-				e.printStackTrace();
-				
+			} catch (RuntimeException | SQLException e) {
+				context.addMessage(null, new FacesMessage("Unable to connect to the database. Try again later."));
+				context.getExternalContext().getSessionMap().clear();
 				return "";
 			}
 		}
-		
 		return "login.xhtml";
 	}
 }

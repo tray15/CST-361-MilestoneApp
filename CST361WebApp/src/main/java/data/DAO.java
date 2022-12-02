@@ -43,7 +43,7 @@ public class DAO implements DataAccessInterface {
 	
 	private static final String GENERATE_RANDOM_EVENT = "INSERT INTO eventhistory (sensor_id, user_id, event_date) VALUES (?, ?, ?)";
 	@Override
-	public void register(UserModel user) throws SQLException {
+	public void register(UserModel user) throws RuntimeException, SQLException {
 		
 		Connection c = null;
 		PreparedStatement stmt = null;
@@ -61,13 +61,12 @@ public class DAO implements DataAccessInterface {
 			close(stmt);
 			close(c);
 		} catch (SQLException e) {
-			System.out.println("Failed to connect to database. User: " + DB_USER);
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 	}
 	
 	@Override
-	public UserModel getByUsername(UserModel user) {
+	public UserModel getByUsername(UserModel user) throws RuntimeException, SQLException {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		try {
@@ -89,13 +88,13 @@ public class DAO implements DataAccessInterface {
 			close(stmt);
 			close(conn);
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 		return null;
 }
 	
 	@Override
-	public void create(Sensor sensor) {
+	public void create(Sensor sensor) throws RuntimeException, SQLException {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		try {
@@ -115,7 +114,7 @@ public class DAO implements DataAccessInterface {
 	}
 
 	@Override
-	public Sensor findSensor(Sensor sensor) {
+	public Sensor findSensor(Sensor sensor) throws RuntimeException, SQLException {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		
@@ -136,7 +135,6 @@ public class DAO implements DataAccessInterface {
 				return found;
 			}
 		} catch (SQLException e) {
-			 e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
 			close(stmt);
@@ -146,7 +144,7 @@ public class DAO implements DataAccessInterface {
 	}
 	
 	@Override
-	public List<Sensor> getSensor(UserModel um) {
+	public List<Sensor> getSensor(UserModel um) throws RuntimeException, SQLException {
 		HttpURLConnection conn = null;
 		try {
 			int id = um.getUserId();
@@ -182,13 +180,13 @@ public class DAO implements DataAccessInterface {
 			conn.disconnect();
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 		return null;
 	}
 	
 	@Override
-	public void generateEvent() {
+	public void generateEvent() throws RuntimeException, SQLException {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		try {
@@ -203,14 +201,14 @@ public class DAO implements DataAccessInterface {
 			
 			stmt.executeUpdate();
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		} finally {
 			close(stmt);
 			close(conn);
 		}
 	}
 
-	private Connection getConnection() {
+	private Connection getConnection() throws RuntimeException, SQLException {
 		try {
 			return DriverManager.getConnection(DB_URL, DB_USER, PASSWORD);
 		} catch (Exception e) {
@@ -218,7 +216,7 @@ public class DAO implements DataAccessInterface {
 		}
 	}
 	
-	private static void close(Statement stmt) {
+	private static void close(Statement stmt) throws RuntimeException, SQLException {
 		if (stmt != null) {
 			try {
 				stmt.close();
@@ -238,7 +236,7 @@ public class DAO implements DataAccessInterface {
 		}
 	}
 	public int randomSensor() {
-		int[] sensors = { 1, 2, 3, 4, 5, 6 };
+		int[] sensors = { 1, 2, 3, 4, 5 };
 		int randomSensor = new Random().nextInt(sensors.length);
 		
 		return sensors[randomSensor];

@@ -1,5 +1,8 @@
 package controllers;
 
+import java.sql.SQLException;
+
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
@@ -27,13 +30,24 @@ public class LoginController {
 	}
 	
 	public String login(UserModel user) {
-		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-		UserModel um = this.manager.findUser(user);
-		if (um != null) {
-			context.getSessionMap().put("userModel", um);
-			return "index.xhtml";
-		} else {
-			context.getRequestMap().put("message", "Invalid username or password");
+		FacesContext context = FacesContext.getCurrentInstance();
+		try {
+			UserModel um = this.manager.findUser(user);
+			//If we have a result from our database
+			if (um != null) {
+				//add the user model we found in context, go to index page.
+				context.getExternalContext().getSessionMap().put("userModel", um);
+				return "index.xhtml";
+			}
+			else {
+				//we didn't find a user, add a message, clear model so nav bar doesn't update
+				context.addMessage(null, new FacesMessage("Invalid username or password."));
+				context.getExternalContext().getSessionMap().clear();
+				return "";
+			}
+		} catch ( RuntimeException | SQLException e) {
+			context.addMessage(null, new FacesMessage("Unable to connect to the database. Try again later."));
+			context.getExternalContext().getSessionMap().clear();
 			return "";
 		}
 	}

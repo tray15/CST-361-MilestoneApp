@@ -14,13 +14,13 @@ import beans.UserModel;
  */
 
 public interface DataAccessInterface {
-	void register(UserModel user) throws SQLException;
-	public UserModel getByUsername(UserModel u);
+	void register(UserModel user) throws RuntimeException, SQLException;
+	public UserModel getByUsername(UserModel u) throws RuntimeException, SQLException;
 	
-	void create(Sensor sensor);
-	List<Sensor> getSensor(UserModel um);
-	Sensor findSensor(Sensor sensor);
+	void create(Sensor sensor) throws RuntimeException, SQLException;
+	List<Sensor> getSensor(UserModel um) throws RuntimeException, SQLException;
+	Sensor findSensor(Sensor sensor) throws RuntimeException, SQLException;
 	
-	void generateEvent();
+	void generateEvent() throws RuntimeException, SQLException;
 	
 }

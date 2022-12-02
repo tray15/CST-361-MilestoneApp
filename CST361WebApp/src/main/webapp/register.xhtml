@@ -17,6 +17,7 @@
 					<h3>Register here!</h3>
 					Username: <h:inputText value="#{userModel.username}" class="form-control"></h:inputText><br />
 					Password: <h:inputText value="#{userModel.password}" class="form-control"></h:inputText><br />
+					<h:messages style="color: red" />
 					<h:commandButton action="#{registerController.register()}" value="Register" class="btn btn-primary"></h:commandButton>
 				</div>
 			</h:form>

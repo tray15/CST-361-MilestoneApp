@@ -1,5 +1,7 @@
 package controllers;
 
+import java.sql.SQLException;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
@@ -22,7 +24,7 @@ public class SensorController {
 		return service;
 	}
 	
-	public String emulateEvent() {
+	public String emulateEvent() throws RuntimeException, SQLException {
 		service.generateEvent();
 		
 		return "";

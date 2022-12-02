@@ -1,5 +1,6 @@
 package business;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.ejb.Local;
@@ -31,22 +32,22 @@ public class SensorManager implements SensorManagerInterface {
 	}
 
 	@Override
-	public void addSensor(Sensor sensor) {
+	public void addSensor(Sensor sensor) throws RuntimeException, SQLException {
 		this.dao.create(sensor);
 	}
 	
 	@Override
-	public List<Sensor> getSensor(UserModel um) {
+	public List<Sensor> getSensor(UserModel um) throws RuntimeException, SQLException {
 		return this.dao.getSensor(um);
 	}
 
 	@Override
-	public Sensor findSensor(Sensor sensor) {
+	public Sensor findSensor(Sensor sensor) throws RuntimeException, SQLException {
 		Sensor found = this.dao.findSensor(sensor);
 		return found;
 	}
 	@Override
-	public void generateEvent() {
+	public void generateEvent() throws RuntimeException, SQLException{
 		this.dao.generateEvent();
 	}
 }
